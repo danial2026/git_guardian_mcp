@@ -5,6 +5,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Version](https://img.shields.io/badge/Go-1.21%2B-00ADD8)](https://golang.org/dl/)
 
+## Screenshots
+
+![Example 1](screenshot-1.png)
+
 ## What is this?
 
 Git Guardian MCP is a developer tool that validates code quality before commits and pushes. It works with AI assistants like Cursor through the Model Context Protocol (MCP).
