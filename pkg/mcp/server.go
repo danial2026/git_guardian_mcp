@@ -35,7 +35,7 @@ type Request struct {
 // Response represents an MCP response
 type Response struct {
 	JSONRPC string      `json:"jsonrpc"`
-	ID      interface{} `json:"id,omitempty"`
+	ID      interface{} `json:"id"`
 	Result  interface{} `json:"result,omitempty"`
 	Error   *Error      `json:"error,omitempty"`
 }
@@ -97,7 +97,7 @@ func (s *Server) handleRequest(req *Request) {
 	switch req.Method {
 	case "initialize":
 		s.handleInitialize(req)
-	case "initialized":
+	case "initialized", "notifications/initialized":
 		// Notification - no response needed
 		return
 	case "tools/list":
@@ -111,6 +111,11 @@ func (s *Server) handleRequest(req *Request) {
 	case "ping":
 		s.sendResponse(req.ID, map[string]interface{}{})
 	default:
+		// Don't send error responses for notifications (methods without IDs)
+		if req.ID == nil {
+			s.logger.Printf("Ignoring notification: %s", req.Method)
+			return
+		}
 		s.logger.Printf("Unknown method: %s", req.Method)
 		s.sendError(req.ID, -32601, fmt.Sprintf("Method not found: %s", req.Method))
 	}
