@@ -1,0 +1,82 @@
+# Git Guardian MCP Configuration
+# Copy this file to .mcp.yml and customize for your project
+
+tests:
+  # Go tests
+  - name: go-tests
+    command: go test ./...
+    blocking: true
+    timeout: 300  # seconds
+
+  # Go tests with coverage
+  - name: go-tests-coverage
+    command: go test -cover ./...
+    blocking: false
+    timeout: 300
+
+  # Go tests with race detection
+  - name: go-tests-race
+    command: go test -race ./...
+    blocking: true
+    timeout: 600
+
+  # Flutter/Dart tests
+  - name: flutter-tests
+    command: flutter test
+    blocking: true
+    timeout: 300
+
+  # Dart tests only
+  - name: dart-tests
+    command: dart test
+    blocking: true
+    timeout: 300
+
+  # JavaScript/TypeScript tests (Jest)
+  - name: jest-tests
+    command: npm test
+    blocking: true
+    timeout: 300
+
+  # Python tests (pytest)
+  - name: pytest
+    command: pytest
+    blocking: true
+    timeout: 300
+
+  # Build verification
+  - name: go-build
+    command: go build ./...
+    blocking: true
+    timeout: 300
+
+  # Flutter build verification
+  - name: flutter-build
+    command: flutter build apk --debug
+    blocking: false
+    timeout: 600
+
+  # Custom integration tests
+  - name: integration-tests
+    command: ./scripts/run-integration-tests.sh
+    blocking: true
+    timeout: 900
+
+  # Benchmarks (non-blocking, informational)
+  - name: go-bench
+    command: go test -bench=. ./...
+    blocking: false
+    timeout: 300
+
+# Configuration notes:
+# - name: Unique identifier for the test
+# - command: Shell command to execute
+# - blocking: If true, push fails when test fails
+# - timeout: Maximum execution time in seconds (default: 300)
+#
+# Tips:
+# - Use blocking: true for critical tests
+# - Use blocking: false for advisory tests (benchmarks, slow tests)
+# - Set appropriate timeouts for long-running tests
+# - Commands run from repository root
+

@@ -1,0 +1,46 @@
+linters-settings:
+  govet:
+    check-shadowing: true
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: github.com/danial2026/git_guardian_mcp
+  misspell:
+    locale: US
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+
+linters:
+  enable:
+    - gofmt
+    - govet
+    - errcheck
+    - staticcheck
+    - unused
+    - gosimple
+    - ineffassign
+    - typecheck
+    - misspell
+  disable:
+    - structcheck
+    - varcheck
+    - deadcode
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - errcheck
+  max-same-issues: 0
+  max-issues-per-linter: 0
+
+run:
+  timeout: 5m
+  skip-dirs:
+    - vendor
+    - build
+    - dist
+

@@ -1,0 +1,18 @@
+# Git Guardian MCP Configuration for this project
+
+tests:
+  - name: go-tests
+    command: go test ./...
+    blocking: true
+    timeout: 300
+
+  - name: go-vet
+    command: go vet ./...
+    blocking: true
+    timeout: 60
+
+  - name: go-build
+    command: go build -o /tmp/git-guardian-test ./...
+    blocking: true
+    timeout: 120
+

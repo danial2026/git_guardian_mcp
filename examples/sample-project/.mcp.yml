@@ -1,0 +1,18 @@
+# Sample configuration for a Go project
+
+tests:
+  - name: unit-tests
+    command: go test ./...
+    blocking: true
+    timeout: 300
+
+  - name: build-check
+    command: go build ./...
+    blocking: true
+    timeout: 120
+
+  - name: vet-check
+    command: go vet ./...
+    blocking: true
+    timeout: 60
+
